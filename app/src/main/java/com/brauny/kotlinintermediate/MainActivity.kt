@@ -17,7 +17,9 @@ class MainActivity : AppCompatActivity() {
 
     // visibility modifier
     private fun visibilityModifier() {
-
+        //val visibility = Visibility()
+        //visibility.name = "Francisco"
+        // visibility.saveMyName() // Output: Mi nombre es Francisco
     }
 
     // Interface
