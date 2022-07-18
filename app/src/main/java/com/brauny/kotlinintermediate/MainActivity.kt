@@ -2,6 +2,9 @@ package com.brauny.kotlinintermediate
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.thread
 
 typealias MyMapList = MutableMap<Int, ArrayList<String>>
 
@@ -22,11 +25,44 @@ class MainActivity : AppCompatActivity() {
         typeAlias()
         destructuring()
         extensions()
+        lambdas()
+    }
+
+    // Lambdas
+    // Funciones dentro de funciones que ejecutan funciones
+    private fun lambdas() {
+        val addNum = fun (x: Int, y: Int) : Int = x + y
+        val multNum = fun (x: Int, y: Int) : Int = x * y
+
+        println(myOp(6, 8, addNum))
+        println(myOp(3, 5, multNum))
+        myOp(8, 24) { x, y -> x - y }
+
+        asyncFun("Francisco") {
+            println(it)
+        }
+    }
+
+    private fun myOp(x: Int, y: Int, myFun: (Int, Int) -> Int): Int {
+        return myFun(x, y)
+    }
+
+    private fun asyncFun(name: String, hello: (String) -> Unit) {
+        val saludo = "Hello $name"
+        thread {
+            Thread.sleep(5000)
+            hello(saludo)
+        }
     }
 
     // Extensions
     private fun extensions() {
+        val myDate = Date()
+        println(myDate.customFormat())
+        println(myDate.formatSize)
 
+        var myDateNullable: Date? = null
+        println(myDateNullable?.customFormat())
     }
 
     // Desctructuring
